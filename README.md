@@ -88,3 +88,21 @@ app.use('/', require('./routes/main_route.js'))
 ```
 <br><br>
 <h1>Zadanie no 2</h1>
+Rozpoczynając kolejne zadania, należy stworzyć w folderze głównym plik <b>.env</b> zawierający zmienne środowiskowe.
+W nim korzystając z terminala node (komenda node) należy wygenerować 2 różne stringi wielkości 64 bajtów.
+
+```
+require('crypto').randomBytes(64).toString('hex')
+```
+i umieścić je w nim:
+
+```
+ACCESS_TOKEN_SECRET=string_1
+REFRESH_TOKEN_SECRET=string_2
+```
+Do testów proszę również stworzyć plik **users.json** w folderze model z zawartością:
+
+```
+[]
+```
+
