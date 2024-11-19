@@ -19,4 +19,21 @@ W plikach, które znajdują się w folderze dla tego zadania, i które nas inter
   <li><b>package.json</b> - jest to plik, w którym znajdują się informacje dot. projektu, jego zależności (z jakich bibliotek korzystamy), definicje skryptów uruchamiających aplikację itd.</li>
   <li><b>w odpowiednich folderach pliki statyczne index.html i styles.css</b></li>
 </ul>
-W celu uruchomienia serwera należy wpisać komendy: `npm i` - pobierze wymagane biblioteki, `npm run dev` - uruchomi serwer
+W celu uruchomienia serwera należy wpisać komendy (pierwsza pobierze biblioteki, druga uruchomi serwer): 
+
+```
+npm i
+npm run dev
+```
+Żeby serwer zwrócił nam stronę należy dodać do niego kod: 
+
+```javascript
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'index.html'))
+})
+```
+Tak wygląda podstawowy route, można sprawdzić jego działanie na stronie 
+
+```
+http://localhost:3000/
+```
