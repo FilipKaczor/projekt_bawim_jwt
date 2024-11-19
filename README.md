@@ -8,8 +8,8 @@ ExpressJS jest to szybki, web, backendowy framework. Używany jest ze względu n
 <li><b>Zadanie no 1</b> będzie miało na celu pokazanie podstaw działania tego framework'u, strukturą plików i przygotowaniem do implementacji JWT.</li>
 <li><b>Zadanie no 2 & 3</b> pokażą podstawową implementację i testowanie JWT na podstawie struktury plików z zadania no 1.</li>
 </ul>
-Zachęca się do robienia zadań po kolei, ale w przypadku, gdy ktoś jest zaznajomiony z ExpressJS, można pobrać pliki z folderu <i>fin_Zadanie_1</i> i przejść do kolejnych zadań.
-**Zalecane jest korzystanie z VSC i zainstalowanie na nim rozszerzenia Thunder Client**
+Zachęca się do robienia zadań po kolei, ale w przypadku, gdy ktoś jest zaznajomiony z ExpressJS, można pobrać pliki z folderu <i>fin_Zadanie_1</i> i przejść do kolejnych zadań.<br>
+<b>Zalecane jest korzystanie z VSC i zainstalowanie na nim rozszerzenia Thunder Client</b>
 <br><br>
 <h1>Zadanie no 1</h1>
 <b>Proszę pobrać pliki z folderu <i>Zadanie_1</i></b>
