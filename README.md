@@ -194,5 +194,27 @@ Dane które tutaj przyjmujemy, to dane logowania, więc przydałoby się najpier
 Do sprawdzenia hasła powinno posłużyć np: 
 
 ```javascript
-const match = await bcrypt.compare(password, foundUser.password) //zwraca boolean, true w przypadku poprawnego porównania
+const match = await bcrypt.compare(haslo_wpisane, haslo_z_bazy_danych) //zwraca boolean, true w przypadku poprawnego porównania
 ```
+W instrukcji warunkowej, gdy hasło się zgadza, możemy stworzyć nasze tokeny.
+
+```javascript
+  const accessToken = jwt.sign(
+      { 'username': nazwa_uzytkownika },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '30s' } //15m normally
+  )
+
+  const refreshToken = jwt.sign(
+      { 'username': nazwa_uzytkownika },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: '1d' }
+  )
+```
+Tworzymy dwa tokeny: 
+<ul>
+<li>Access - jest to token o krótkiej dacie ważności, na potrzeby testów można ustawić ją na 30 sekund, </li>
+<li>Refresh - token o długiej dacie ważności, potrzebny do tworzenia nowych access tokenów</li>
+</ul>
+Dodatkowo warto nadmienić, że access tokeny będziemy umieszczać w ciasteczkach, ale typu httpOnly, który sprawia, że nie ma do nich dostępu z poziomu JS.<br>
+Refresh tokeny za to, będą w bazie danych, zaraz obok nazwy użytkownika i hasła.
