@@ -126,7 +126,15 @@ const fsPromises = require('fs').promises //do edycji pliku
 const path = require('path') //do tworzenia ścieżek
 const bcrypt = require('bcrypt') //do hashowania
 ```
-Następnie tworzymy funkcję **handleNewUser** (asynchroniczną, ponieważ fsPromises jest asynchroniczne) i w niej:
+Następnie tworzymy funkcję **handleNewUser** (asynchroniczną, ponieważ fsPromises i bcrypt są asynchroniczne)
+
+```javascript
+const handleNewUser = async (req, res) => {
+}
+module.exports = { handleNewUser }
+```
+
+i w niej:
 <ol>
   <li>Pobieramy dane od użytkownika</li>
   <li>Sprawdzamy, czy użytkownik istnieje i w takim przypadku zwracamy odpowiedni status</li>
@@ -154,3 +162,37 @@ W celu przetestowania, najłatwiej skorzystać z rozszerzenia do VSC o nazwie: T
 <li>Uzupełnić body odpowiednimi danymi w formacie .json</li>
 </ol>
 Przykładowo:
+<img src='Screenshots/thunderclient_reg.png'>
+
+<h2>3.Tworzenie kontrolera autentykacji</h2>
+Po zabawie z samym expressem przyszedł czas na JWT. <br>
+Należy stworzyć kolejny plik w folderze controllers. <br>
+W nim podobnie jak w poprzednim podpunkcie należy:
+<ol>
+  <li>Zainicjować bazę danych (plik)</li>
+  <li>Zainicjować biblioteki (w tym nową <i>jsonwebtoken</i>) i plik ze zmiennymi środowiskowymi:
+    
+  ```javascript
+  const bcrypt = require('bcrypt')
+  const jwt = require('jsonwebtoken')
+  require('dotenv').config()
+  const fsPromises = require('fs').promises
+  const path = require('path')
+  ```
+  </li>
+  <li>Stworzyć asynchroniczną funkcję <b>handleLogin</b>: 
+
+  ```javascript
+  const handleLogin = async (req, res) => {
+  }
+  module.exports = { handleLogin }
+  ```
+  </li>
+</ol>
+
+Dane które tutaj przyjmujemy, to dane logowania, więc przydałoby się najpierw sprawdzić, czy taki użytkownik istnieje i czy jego hasło jest poprawne.<br>
+Do sprawdzenia hasła powinno posłużyć np: 
+
+```javascript
+const match = await bcrypt.compare(password, foundUser.password) //zwraca boolean, true w przypadku poprawnego porównania
+```
