@@ -298,7 +298,7 @@ app.use(cookieParser())
 
 <h3>Testowanie</h3>
 Żeby przetestować odświeżanie, należy najpierw skorzystać z wcześniejszego requesta i zalogować się. W odpowiedzi, w zakładce <b>Cookies</b> otrzymamy nasze ciasteczko JWT, można sobie je tam podejrzeć.
-Następnie, wystarczy wysłać jedno zapytanie metodą GET, na ścieżce z tego zadania.
+Następnie, wystarczy wysłać jedno zapytanie metodą GET, na ścieżce z tego zadania. W odpowiedzi otrzymujemy access token. <br>
 <img src="Screenshots/thunderclient_ref1.png">
 <img src="Screenshots/thunderclient_ref2.png">
 <br>
