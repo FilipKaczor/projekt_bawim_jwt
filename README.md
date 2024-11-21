@@ -235,5 +235,9 @@ res.json({ 'success': `user ${nazwa_uzytkownika} logged in`, 'accessToken': acce
 <br><b>Jedyne co pozostało, to analogicznie do wcześniejszych podpunktów stworzyć ścieżkę w folderze routes i dodanie jej do głównego pliku serwera.</b>
 
 <h3>Testowanie</h3>
-Korzystając z Thunder Client, należy wysłać login i hasło naszego, wcześniej utworzonego użytkownika na odpowiedni adres.<br>
+Korzystając z Thunder Client, należy wysłać login i hasło naszego, wcześniej utworzonego użytkownika na odpowiedni adres.<br><br>
 Wynik powinien być następujący:
+<img src="Screenshots/thunderclient_auth.png">
+
+<h1>Zadanie nr 3</h1>
+Jak można było zauważyć, nasz access token bardzo szybko się 'zużywa'. Należy zatem zaimplementować mechanizm, który na podstawie refresh tokena, którego mamy w httpOnly cookie, stworzy i wyśle nowego, świeżego access tokena.
