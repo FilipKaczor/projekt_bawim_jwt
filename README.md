@@ -144,4 +144,13 @@ await fsPromises.writeFile(path.join(__dirname, '..', 'model', 'users.json'), JS
 Następnym krokiem w tym podpunkcie jest jedynie podpięci tego kontrolera do (wymagającego stworzenia) pliku ścieżki w folderze routes i dodania odpowiedniej ścieżki w głównym serwerze.
 Wszystko analogicznie do **Zadania no 1**. 
 
-
+<h3>Testowanie</h3>
+W celu przetestowania, najłatwiej skorzystać z rozszerzenia do VSC o nazwie: Thunder Client.
+Żeby z niego skorzystać, trzeba: 
+<ol>
+<li>Stworzyć nowy request (klikając New Request)</li>
+<li>Wybrać odpowiednią metodę (Post)</li>
+<li>Wpisać odpowiedni adres (http://localhost:3000/register)</li>
+<li>Uzupełnić body odpowiednimi danymi w formacie .json</li>
+</ol>
+Przykładowo:
