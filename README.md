@@ -89,6 +89,7 @@ app.use('/', require('./routes/main_route.js'))
 ```
 <br><br>
 <h1>Zadanie no 2</h1>
+<h2>1.Tworzenie pliku .env i 'bazy danych'</h2>
 Rozpoczynając kolejne zadania, należy stworzyć w folderze głównym plik <b>.env</b> zawierający zmienne środowiskowe.
 W nim korzystając z terminala node (komenda node) należy wygenerować 2 różne stringi wielkości 64 bajtów.
 
@@ -106,4 +107,39 @@ Do testów proszę również stworzyć plik **users.json** w folderze model z za
 ```
 []
 ```
+<h2>2.Tworzenie kontroloera rejestracji</h2>
+W folderze controllers należy stworzyć plik, w którym napiszemy kontroler do rejestracji.
+Na samej górze tego pliku musimy zainicjować nasza bazę danych (czyli plik users.json). Wygląd tego kodu może przypominać useState z ReactJS i działa to podobnie:
 
+```javascript
+const usersDB = {
+    users: require('../model/users.json'), 
+    setUsers: function (data) {
+        this.users = data
+    }
+}// usersDB.users -> pobranie zawartości, usersDB.serUsers() -> nadpisanie zawartości 
+```
+Potem musimy zainicjować biblioteki, których będziemy używać:
+
+```javascript
+const fsPromises = require('fs').promises //do edycji pliku 
+const path = require('path') //do tworzenia ścieżek
+const bcrypt = require('bcrypt') //do hashowania
+```
+Następnie tworzymy funkcję **handleNewUser** (asynchroniczną, ponieważ fsPromises jest asynchroniczne) i w niej:
+<ol>
+  <li>Pobieramy dane od użytkownika</li>
+  <li>Sprawdzamy, czy użytkownik istnieje i w takim przypadku zwracamy odpowiedni status</li>
+  <li>Hashujemy hasło użytkownika i dodajemy go do bazy danych</li>
+</ol>
+Pomocny kod:
+
+```javascript
+const { user, password } = req.body //pobranie wartości {login, hasło}
+res.status(409).json({ 'message': 'user exists' }) //wysłanie statusu 409 z custom wiadomością
+const hashedPassword = await bcrypt.hash(password, 10) //hashowanie hasła
+await fsPromises.writeFile(path.join(__dirname, '..', 'model', 'users.json'), JSON.stringify(usersDB.users)) //nadpisywanie pliku users.json nowymi danymi
+```
+<b>Zachęcamy do samodzielnego podejścia do problemu. W przypadku trudności można spojrzeć do folderu fin_Zadanie_2_2 i zaczerpnąć inspiracji.</b>
+Następnym krokiem w tym podpunkcie jest jedynie podpięci tego kontrolera do (wymagającego stworzenia) pliku ścieżki w folderze routes i dodania odpowiedniej ścieżki w głównym serwerze.
+Wszystko analogicznie do **Zadania no 1**. 
