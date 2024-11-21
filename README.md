@@ -11,6 +11,7 @@ ExpressJS jest to szybki, web, backendowy framework. Używany jest ze względu n
 Zachęca się do robienia zadań po kolei, ale w przypadku, gdy ktoś jest zaznajomiony z ExpressJS, można pobrać pliki z folderu <i>fin_Zadanie_1</i> i przejść do kolejnych zadań.<br><br>
 <b>Zalecane jest korzystanie z VSC i zainstalowanie na nim rozszerzenia Thunder Client</b>
 <br><br>
+
 <h1>Zadanie nr 1</h1>
 <b>Proszę pobrać pliki z folderu <i>Zadanie_1</i></b>
 Express, to proste narzędzie do budowania backendu. W nim można definiować jak zachowa się serwer np. jakie pliki zwróci, co zmieni w bazie danych, na podstawie akcji wykonanych przez użytkownika.
@@ -298,4 +299,9 @@ app.use(cookieParser())
 <h3>Testowanie</h3>
 Żeby przetestować odświeżanie, należy najpierw skorzystać z wcześniejszego requesta i zalogować się. W odpowiedzi, w zakładce <b>Cookies</b> otrzymamy nasze ciasteczko JWT, można sobie je tam podejrzeć.
 Następnie, wystarczy wysłać jedno zapytanie metodą GET, na ścieżce z tego zadania.
+<img src="Screenshots/thunderclient_ref1.png">
+<img src="Screenshots/thunderclient_ref2.png">
+<br>
+<h1>Dziękujemy za uwagę!</h1>
+
 
