@@ -241,3 +241,61 @@ Wynik powinien być następujący:
 
 <h1>Zadanie nr 3</h1>
 Jak można było zauważyć, nasz access token bardzo szybko się 'zużywa'. Należy zatem zaimplementować mechanizm, który na podstawie refresh tokena, którego mamy w httpOnly cookie, stworzy i wyśle nowego, świeżego access tokena.
+<br><br>Tak jak wyżej, przygotowujemy nowy kontoler i inicjujemy w nim bazę danych i wymaganą bibliotekę jwt, a także plik .env.<br>
+
+```javascript
+const usersDB = {
+    users: require('../model/users.json'),
+    setUsers: function (data) {
+        this.users = data
+    }
+}
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+```
+Tworzymy również nową funkcję, ale tym razem nie będzie ona asynchroniczna. Dodatkowo dobieramy się w niej do zawartości ciasteczek, a konkretnie <b>cookies.jwt</b>. To ciasteczko jest naszym refresh tokenem.
+
+```javascript
+const handleRefreshToken = (req, res) => {
+const cookies = req.cookies 
+if (!cookies?.jwt) return res.sendStatus(401) //sprawdzenie, czy istnieją jakiekolwiek ciasteczka JWT
+console.log(cookies.jwt) //pokazanie naszego refresh tokena
+}
+module.exports = { handleRefreshToken }
+```
+Następnym krokiem jest znalezienie użytkownika o danym refresh tokenie, co nie będzie trudne, bo refresh tokeny przechowujemy w bazie danych
+<br><br>
+Gdy będziemy mieli znalezionego użytkownika należy zweryfikować jego refreshtoken pod względem autentyczności. Posłuży nam do tego nasz podpis, który daliśmy mu przy jego generowaniu. 
+
+```javascript
+jwt.verify(
+    refreshToken, //znaleziony refresh token
+    process.env.REFRESH_TOKEN_SECRET, //nasza zmienna środowiskowa
+    (err, decoded) => {
+        if (err || foundUser.username !== decoded.username) return res.sendStatus(403) //sprawdzenie czy nazwa użytkownika z refresh tokenu zgadza się z tą z bazy danych
+        const accessToken = jwt.sign(
+            { "username": decoded.username },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '30s' }
+        ) //utworzenie nowego access tokenu
+        res.json({ accessToken }) //wysłanie go
+    }
+)
+```
+W taki sposób użytkownik z aktywnym refresh tokenem jest w stanie otrzymać nowy access token, bez konieczności ponownego logowania.
+Przed testami należy stworzyć kolejną ścieżkę w nowym pliku, a także dodać ją do głównego pliku serwera.<br><br>
+Żeby jednak nasz serwer mógł odczytywać pliki cookies. Należy na samą górę dodać:<br>
+
+```javascript
+const cookieParser = require('cookie-parser')
+```
+a niżej w kodzie:<br>
+
+```javascript
+app.use(cookieParser())
+```
+
+<h3>Testowanie</h3>
+Żeby przetestować odświeżanie, należy najpierw skorzystać z wcześniejszego requesta i zalogować się. W odpowiedzi, w zakładce <b>Cookies</b> otrzymamy nasze ciasteczko JWT, można sobie je tam podejrzeć.
+Następnie, wystarczy wysłać jedno zapytanie metodą GET, na ścieżce z tego zadania.
+
