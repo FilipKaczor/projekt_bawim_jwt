@@ -165,7 +165,7 @@ W celu przetestowania, najłatwiej skorzystać z rozszerzenia do VSC o nazwie: T
 Przykładowo:
 <img src='Screenshots/thunderclient_reg.png'>
 
-<h2>3.Tworzenie kontrolera autentykacji</h2>
+<h2>3.Tworzenie kontrolera uwieżytelniania</h2>
 Po zabawie z samym expressem przyszedł czas na JWT. <br>
 Należy stworzyć kolejny plik w folderze controllers. <br>
 W nim podobnie jak w poprzednim podpunkcie należy:
