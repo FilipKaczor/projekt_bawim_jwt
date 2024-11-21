@@ -5,13 +5,13 @@ Celem zadań jest zaznajomienie studentów z ExpressJS i technologią Json Web T
 <b>Wstęp:</b>
 ExpressJS jest to szybki, web, backendowy framework. Używany jest ze względu na swoją prostotę, przez co idealnie nadaje się do nauki podstawowych funkcji.
 <ul>
-<li><b>Zadanie no 1</b> będzie miało na celu pokazanie podstaw działania tego framework'u, strukturą plików i przygotowaniem do implementacji JWT.</li>
-<li><b>Zadanie no 2 & 3</b> pokażą podstawową implementację i testowanie JWT na podstawie struktury plików z zadania no 1.</li>
+<li><b>Zadanie nr 1</b> będzie miało na celu pokazanie podstaw działania tego framework'u, strukturą plików i przygotowaniem do implementacji JWT.</li>
+<li><b>Zadanie nr 2 & 3</b> pokażą podstawową implementację i testowanie JWT na podstawie struktury plików z zadania no 1.</li>
 </ul>
 Zachęca się do robienia zadań po kolei, ale w przypadku, gdy ktoś jest zaznajomiony z ExpressJS, można pobrać pliki z folderu <i>fin_Zadanie_1</i> i przejść do kolejnych zadań.<br><br>
 <b>Zalecane jest korzystanie z VSC i zainstalowanie na nim rozszerzenia Thunder Client</b>
 <br><br>
-<h1>Zadanie no 1</h1>
+<h1>Zadanie nr 1</h1>
 <b>Proszę pobrać pliki z folderu <i>Zadanie_1</i></b>
 Express, to proste narzędzie do budowania backendu. W nim można definiować jak zachowa się serwer np. jakie pliki zwróci, co zmieni w bazie danych, na podstawie akcji wykonanych przez użytkownika.
 W plikach, które znajdują się w folderze dla tego zadania, i które nas interesują, można znaleźć:
@@ -44,7 +44,7 @@ W kolejnych zadaniach struktura nie będzie jednak taka prosta.
 |-controllers //do trzymania plików "kontrolerów"
 |-middleware  //do trzymania plików "middleware"
 |-model //do trzymania plików json imitujących bazy danych
-|-node_modules (istnieje)
+|-de_modules (istnieje)
 |-public|
         |-css (istnieje)
 |-routes //do trzymania "ścieżek"
@@ -88,7 +88,7 @@ Tutaj importujemy moduł wcześniej stworzony i tworzymy ścieżkę, działając
 app.use('/', require('./routes/main_route.js'))
 ```
 <br><br>
-<h1>Zadanie no 2</h1>
+<h1>Zadanie nr 2</h1>
 <h2>1.Tworzenie pliku .env i 'bazy danych'</h2>
 Rozpoczynając kolejne zadania, należy stworzyć w folderze głównym plik <b>.env</b> zawierający zmienne środowiskowe.
 W nim korzystając z terminala node (komenda node) należy wygenerować 2 różne stringi wielkości 64 bajtów.
@@ -216,5 +216,24 @@ Tworzymy dwa tokeny:
 <li>Access - jest to token o krótkiej dacie ważności, na potrzeby testów można ustawić ją na 30 sekund, </li>
 <li>Refresh - token o długiej dacie ważności, potrzebny do tworzenia nowych access tokenów</li>
 </ul>
-Dodatkowo warto nadmienić, że access tokeny będziemy umieszczać w ciasteczkach, ale typu httpOnly, który sprawia, że nie ma do nich dostępu z poziomu JS.<br>
-Refresh tokeny za to, będą w bazie danych, zaraz obok nazwy użytkownika i hasła.
+Dodatkowo warto nadmienić, że refresh tokeny będziemy umieszczać w ciasteczkach, ale typu httpOnly, który sprawia, że nie ma do nich dostępu z poziomu JS i dorzycimy je do bazy danych<br>
+Access tokeny odeślemy w postaci jsona spowrotem do użytkownika<br><br>
+<b>Przykładowy kod implementacji:</b>
+
+```javascript
+const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username) //wybieramy wszystkich użytkowników innych od naszego
+const currentUser = { ...foundUser, refreshToken } //dodajemy refreshtoken do obiektu użytkownika
+usersDB.setUsers([...otherUsers, currentUser]) //dodajemy zaktualizowany obiekr użytkownika do bazy
+await fsPromises.writeFile(
+    path.join(__dirname, '..', 'model', 'users.json'),
+    JSON.stringify(usersDB.users)
+)//aktualizujemy plik bazy danych
+
+res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }) //wysyłanie httpOnly cookie
+res.json({ 'success': `user ${nazwa_uzytkownika} logged in`, 'accessToken': accessToken }) //wysyłanie access tokena do użytkownika
+```
+<br><b>Jedyne co pozostało, to analogicznie do wcześniejszych podpunktów stworzyć ścieżkę w folderze routes i dodanie jej do głównego pliku serwera.</b>
+
+<h3>Testowanie</h3>
+Korzystając z Thunder Client, należy wysłać login i hasło naszego, wcześniej utworzonego użytkownika na odpowiedni adres.<br>
+Wynik powinien być następujący:
