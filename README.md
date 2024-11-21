@@ -107,7 +107,7 @@ Do testów proszę również stworzyć plik **users.json** w folderze model z za
 ```
 []
 ```
-<h2>2.Tworzenie kontroloera rejestracji</h2>
+<h2>2.Tworzenie kontrolera rejestracji</h2>
 W folderze controllers należy stworzyć plik, w którym napiszemy kontroler do rejestracji.
 Na samej górze tego pliku musimy zainicjować nasza bazę danych (czyli plik users.json). Wygląd tego kodu może przypominać useState z ReactJS i działa to podobnie:
 
@@ -143,3 +143,5 @@ await fsPromises.writeFile(path.join(__dirname, '..', 'model', 'users.json'), JS
 <b>Zachęcamy do samodzielnego podejścia do problemu. W przypadku trudności można spojrzeć do folderu fin_Zadanie_2_2 i zaczerpnąć inspiracji.</b>
 Następnym krokiem w tym podpunkcie jest jedynie podpięci tego kontrolera do (wymagającego stworzenia) pliku ścieżki w folderze routes i dodania odpowiedniej ścieżki w głównym serwerze.
 Wszystko analogicznie do **Zadania no 1**. 
+
+
