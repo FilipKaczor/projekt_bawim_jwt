@@ -1,5 +1,10 @@
 # projekt_bawim_jwt
 
+<h1>Prezentacja</h1>
+
+<h2>[link do canvy placeholder]</h2>
+
+<h1>Zadania</h1><br>
 Celem zadań jest zaznajomienie studentów z ExpressJS i technologią Json Web Token. 
 
 <b>Wstęp:</b>
