@@ -2,7 +2,7 @@
 
 <h1>Prezentacja</h1>
 
-<h2>[link do canvy placeholder]</h2>
+<h2><a href="https://www.canva.com/design/DAGW2N-vbYs/DbrZwxXupFZP5lHEMR-05Q/view?utm_content=DAGW2N-vbYs&utm_campaign=designshare&utm_medium=link&utm_source=editor">click!</a></h2>
 
 <h1>Zadania</h1><br>
 Celem zadań jest zaznajomienie studentów z ExpressJS i technologią Json Web Token. 
