@@ -3,7 +3,8 @@
 <h2><a href="https://www.canva.com/design/DAGW2N-vbYs/DbrZwxXupFZP5lHEMR-05Q/view?utm_content=DAGW2N-vbYs&utm_campaign=designshare&utm_medium=link&utm_source=editor">Prezentacja</a></h2>
 
 <h1>Zadania</h1><br>
-Celem zadań jest zaznajomienie studentów z ExpressJS i technologią Json Web Token. 
+Celem zadań jest zaznajomienie studentów z ExpressJS i technologią Json Web Token.
+<b>Wymagane jest zainstalowanie NODE</b>
 
 <b>Wstęp:</b>
 ExpressJS jest to szybki, web, backendowy framework. Używany jest ze względu na swoją prostotę, przez co idealnie nadaje się do nauki podstawowych funkcji.
